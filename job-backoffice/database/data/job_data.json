@@ -1,0 +1,170 @@
+{
+    "jobCategories": [
+        "Web Development",
+        "API Development",
+        "Software Testing",
+        "System Administration",
+        "Mobile Apps Development",
+        "Data Engineering",
+        "IT Project Management"
+    ],
+    "companies": [
+        {
+            "name": "NileTech Solutions",
+            "address": "15 Tahrir Street, Cairo, Egypt",
+            "industry": "Information Technology",
+            "website": "https://niletech-solutions.com",
+            "description": "Egyptian software company delivering business automation and web solutions"
+        },
+        {
+            "name": "Arab Digital Systems",
+            "address": "King Fahd Road, Riyadh, Saudi Arabia",
+            "industry": "Technology",
+            "website": "https://arabdigitalsys.com",
+            "description": "Regional IT services provider specializing in enterprise platforms"
+        },
+        {
+            "name": "Delta Soft Innovations",
+            "address": "Mansoura City, Dakahlia, Egypt",
+            "industry": "Software Development",
+            "website": "https://deltasoft.dev",
+            "description": "Software house focused on modern applications and cloud solutions"
+        },
+        {
+            "name": "Future Code Labs",
+            "address": "Dubai Internet City, UAE",
+            "industry": "Technology",
+            "website": "https://futurecodelabs.com",
+            "description": "Innovative company building scalable digital products for startups"
+        },
+        {
+            "name": "Smart Vision Tech",
+            "address": "Amman Business Park, Jordan",
+            "industry": "IT Services",
+            "website": "https://smartvisiontech.net",
+            "description": "Technology consulting company delivering digital transformation solutions"
+        }
+    ],
+    "jobVacancies": [
+        {
+            "title": "Frontend Engineer",
+            "description": "Looking for a frontend engineer skilled in modern UI frameworks to build responsive dashboards and web applications.",
+            "location": "Cairo, Egypt",
+            "type": "Full-time",
+            "salary": 42000,
+            "category": "Web Development",
+            "company": "NileTech Solutions",
+            "technologies": ["Vue.js", "JavaScript", "Bootstrap", "REST APIs"]
+        },
+        {
+            "title": "Junior Frontend Developer",
+            "description": "Entry-level frontend developer to assist in building responsive web interfaces and maintaining UI components.",
+            "location": "Remote",
+            "type": "Remote",
+            "salary": 18000,
+            "category": "Web Development",
+            "company": "Arab Digital Systems",
+            "technologies": ["HTML", "CSS", "JavaScript", "Tailwind"]
+        },
+        {
+            "title": "UI Lead Developer",
+            "description": "Lead UI development team, enforce coding standards, and deliver scalable frontend architecture.",
+            "location": "Dubai, UAE",
+            "type": "Full-time",
+            "salary": 65000,
+            "category": "Web Development",
+            "company": "Future Code Labs",
+            "technologies": ["React", "TypeScript", "Next.js", "Redux"]
+        },
+        {
+            "title": "Backend PHP Developer",
+            "description": "Develop RESTful APIs and maintain backend systems using PHP frameworks and relational databases.",
+            "location": "Mansoura, Egypt",
+            "type": "Hybrid",
+            "salary": 35000,
+            "category": "API Development",
+            "company": "Delta Soft Innovations",
+            "technologies": ["PHP", "Laravel", "MySQL", "Docker"]
+        },
+        {
+            "title": "Java Backend Engineer",
+            "description": "Design scalable backend services and optimize database performance.",
+            "location": "Riyadh, Saudi Arabia",
+            "type": "Full-time",
+            "salary": 52000,
+            "category": "API Development",
+            "company": "Arab Digital Systems",
+            "technologies": ["Java", "Spring Boot", "PostgreSQL", "Redis"]
+        },
+        {
+            "title": "Backend Team Lead",
+            "description": "Architect backend infrastructure and mentor developers on best practices.",
+            "location": "Amman, Jordan",
+            "type": "Full-time",
+            "salary": 60000,
+            "category": "API Development",
+            "company": "Smart Vision Tech",
+            "technologies": ["Node.js", "MongoDB", "Docker", "Kubernetes"]
+        },
+        {
+            "title": "Full Stack Engineer",
+            "description": "Work across frontend and backend layers to deliver complete software solutions.",
+            "location": "Dubai, UAE",
+            "type": "Hybrid",
+            "salary": 48000,
+            "category": "IT Project Management",
+            "company": "Future Code Labs",
+            "technologies": ["React", "Node.js", "Express", "MongoDB"]
+        },
+        {
+            "title": "Senior Full Stack Developer",
+            "description": "Handle architecture decisions and full application lifecycle development.",
+            "location": "Remote",
+            "type": "Full-time",
+            "salary": 58000,
+            "category": "IT Project Management",
+            "company": "NileTech Solutions",
+            "technologies": ["Laravel", "Vue", "MySQL", "Redis"]
+        },
+        {
+            "title": "Mobile App Developer",
+            "description": "Develop cross-platform mobile applications with modern frameworks.",
+            "location": "Cairo, Egypt",
+            "type": "Full-time",
+            "salary": 32000,
+            "category": "Mobile Apps Development",
+            "company": "Delta Soft Innovations",
+            "technologies": ["Flutter", "Dart", "Firebase", "REST APIs"]
+        },
+        {
+            "title": "DevOps Specialist",
+            "description": "Manage CI/CD pipelines and cloud deployments.",
+            "location": "Remote",
+            "type": "Remote",
+            "salary": 50000,
+            "category": "System Administration",
+            "company": "Smart Vision Tech",
+            "technologies": ["AWS", "Docker", "Kubernetes", "Jenkins"]
+        },
+        {
+            "title": "Cloud Solutions Engineer",
+            "description": "Design and maintain scalable cloud infrastructure.",
+            "location": "Riyadh, Saudi Arabia",
+            "type": "Full-time",
+            "salary": 54000,
+            "category": "Data Engineering",
+            "company": "Arab Digital Systems",
+            "technologies": ["Azure", "Terraform", "Kubernetes", "Linux"]
+        },
+        {
+            "title": "Software Architect",
+            "description": "Define system architecture and ensure performance scalability.",
+            "location": "Dubai, UAE",
+            "type": "Full-time",
+            "salary": 72000,
+            "category": "IT Project Management",
+            "company": "Future Code Labs",
+            "technologies": ["Microservices", "DDD", "Cloud Native", "Event Streaming"]
+        }
+    ]
+}

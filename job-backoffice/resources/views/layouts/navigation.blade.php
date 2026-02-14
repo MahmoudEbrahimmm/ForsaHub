@@ -70,7 +70,24 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <a :href="route('companies.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Companies') }}
+            </a>
+            <a :href="route('applications.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Job Applications') }}
+            </a>
+            <a :href="route('categories.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Job Categories') }}
+            </a>
+            <a :href="route('Vacances.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Job Vacanc') }}
+            </a>
+            <a :href="route('users.index')" :active="request()->routeIs('dashboard')">
+                {{ __('Users') }}
+            </a>
         </div>
+
+        
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

@@ -12,7 +12,7 @@ class JobVacancyController extends Controller
      */
     public function index()
     {
-        //
+        return view("dashboard.vacancies.index");
     }
 
     /**

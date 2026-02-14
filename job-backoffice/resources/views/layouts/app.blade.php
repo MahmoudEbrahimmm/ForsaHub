@@ -11,26 +11,82 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <div class="d-flex" id="wrapper">
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    <!-- Sidebar -->
+    <div class="border-end bg-dark text-white" id="sidebar-wrapper" style="width: 250px;">
+        <div class="sidebar-heading text-center py-4 fs-5 fw-bold border-bottom">
+            Dashboard
         </div>
-    </body>
+
+        <div class="list-group list-group-flush">
+            <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Dashboard
+            </a>
+            <a href="{{ route('companies.index') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Companies
+            </a>
+            <a href="{{ route('applications.index') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Job Applications
+            </a>
+            <a href="{{ route('categories.index') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Job Categories
+            </a>
+            <a href="{{ route('Vacances.index') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Job Vacancies
+            </a>
+            <a href="{{ route('users.index') }}" class="list-group-item list-group-item-action bg-dark text-white">
+                Users
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper" class="w-100">
+
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container-fluid">
+
+                <button class="btn btn-outline-secondary" id="menu-toggle">
+                    ☰
+                </button>
+
+                <div class="dropdown ms-auto">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item text-danger">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="container-fluid p-4">
+            @yield('content')
+        </div>
+
+    </div>
+</div>
+
 </html>

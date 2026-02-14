@@ -12,7 +12,8 @@ class JobCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view("dashboard.categories.index");
+
     }
 
     /**

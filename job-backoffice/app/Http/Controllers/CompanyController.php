@@ -12,7 +12,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view("dashboard.companies.index");
+        $companies = Company::latest()->get();
+        return view("dashboard.companies.index" , compact("companies"));
     }
 
     /**

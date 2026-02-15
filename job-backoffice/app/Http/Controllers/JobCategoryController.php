@@ -2,65 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobCategoryRequest;
 use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
 class JobCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view("dashboard.categories.index");
+        // Active
+        $query = JobCategory::latest();
+        // Archived
+        if($request->input("archived") == true){
+            $query->onlyTrashed();
+        }
+
+        $categories = $query->paginate(10)->onEachSide(2);
+        return view("dashboard.categories.index" , compact("categories"));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view("dashboard.categories.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(JobCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+        JobCategory::create($validated);
+        return redirect()->route("dashboard.categories.index")->with("success","Created Category Successfully");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(JobCategory $jobCategory)
+    public function edit($id)
     {
-        //
+        $category = JobCategory::findOrFail($id);
+        return view("dashboard.categories.edit" , compact("category"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(JobCategory $jobCategory)
+    public function update(JobCategoryRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $category = JobCategory::findOrFail($id);
+        $category->update($validated);
+
+        return redirect()->route("dashboard.categories.index")->with("success","Updated Category name success");
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, JobCategory $jobCategory)
+    public function destroy($id)
     {
-        //
+        $category = JobCategory::findOrFail($id);
+        $category->delete();
+        return redirect()->route("dashboard.categories.index")->with("success","Deleted archived a category");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(JobCategory $jobCategory)
-    {
-        //
+    public function restore($id){
+        $category = JobCategory::withTrashed()->findOrFail($id);
+        $category->restore();
+        return redirect()->route("dashboard.categories.index", ['archived' => 'true'])->with("success","Restored Category Successfully!");
+    }
+    public function deleteTrash($id){
+        $category = JobCategory::withTrashed()->findOrFail($id);
+        $category->forceDelete();
+        return redirect()->route("dashboard.categories.index", ['archived' => 'true'])->with("success","Deleted category successfull");
     }
 }

@@ -21,6 +21,10 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     Route::resource('Vacances', JobVacancyController::class);
     Route::resource('users', UserController::class);
 
+    // Trash Categories Route
+    Route::get('categories/{id}/restore',[JobCategoryController::class,'restore'])->name('categories.restore');
+    Route::delete('categories/{id}/delete',[JobCategoryController::class,'deleteTrash'])->name('categories.delete');
+
 });
 
 

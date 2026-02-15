@@ -12,7 +12,8 @@ class JobVacancyController extends Controller
      */
     public function index()
     {
-        return view("dashboard.vacancies.index");
+        $vacancies = JobVacancy::latest()->get();
+        return view("dashboard.vacancies.index" , compact("vacancies"));
     }
 
     /**

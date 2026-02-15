@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-10 text-center m-auto">
                 <div class="d-flex justify-content-between align-items-end mb-3">
-                    <h4 class="fw-bold mb-3 mt-5">Companies</h4>
+                    <h4 class="fw-bold mb-3 mt-5">Job Application</h4>
                     <div>
                         <a href="#" class="btn btn-dark me-2">Archived Companies</a>
                         <a href="#" class="btn btn-primary">Add Company</a>
@@ -14,20 +14,18 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <td>Name</td>
-                            <td>Address</td>
-                            <td>industry</td>
-                            <td>Wibsite</td>
+                            <td>status</td>
+                            <td>ai_generated_score</td>
+                            <td class="w-50">ai_generated_feedback</td>
                             <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($companies as $company)
+                        @foreach ($applications as $application)
                             <tr>
-                                <td>{{ $company->name }}</td>
-                                <td>{{ $company->address }}</td>
-                                <td>{{ $company->industry }}</td>
-                                <td>{{ $company->website }}</td>
+                                <td>{{ $application->status }}</td>
+                                <td>{{ $application->ai_generated_score }}</td>
+                                <td>{{ $application->ai_generated_feedback }}</td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i></a>
                                     <a href="" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square"></i></a>

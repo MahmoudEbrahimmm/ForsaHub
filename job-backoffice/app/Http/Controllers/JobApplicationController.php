@@ -12,7 +12,8 @@ class JobApplicationController extends Controller
      */
     public function index()
     {
-        return view("dashboard.applications.index");
+        $applications = JobApplication::latest()->get();
+        return view("dashboard.applications.index" , compact("applications"));
 
     }
 

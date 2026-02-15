@@ -15,7 +15,7 @@
 
     <!-- Sidebar -->
     <div class="bg-dark text-white p-3" style="width:250px; min-height:100vh;">
-        <h5 class="text-center mb-4">Dashboard</h5>
+        <h5 class="mb-4">Dashboard</h5>
 
         <ul class="nav flex-column">
             <li class="nav-item">
@@ -31,7 +31,7 @@
                 <a href="{{ route('dashboard.categories.index') }}" class="nav-link text-white">Categories</a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('dashboard.Vacances.index') }}" class="nav-link text-white">Vacancies</a>
+                <a href="{{ route('dashboard.vacances.index') }}" class="nav-link text-white">Vacancies</a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('dashboard.users.index') }}" class="nav-link text-white">Users</a>

@@ -24,12 +24,6 @@ class CompanyController extends Controller
         return view("dashboard.companies.index", compact(['companies', 'users']));
     }
 
-    public function show(Company $company)
-    {
-        return view('dashboard.companies.show', compact('company'));
-    }
-
-
     public function create()
     {
         $owners = User::all();
@@ -41,6 +35,11 @@ class CompanyController extends Controller
         $validated = $request->validated();
         Company::create($validated);
         return redirect()->route("dashboard.companies.index")->with("success", "Created company Successfully");
+    }
+
+    public function show(Company $company)
+    {
+        return view('dashboard.companies.show', compact('company'));
     }
 
     public function edit($id)

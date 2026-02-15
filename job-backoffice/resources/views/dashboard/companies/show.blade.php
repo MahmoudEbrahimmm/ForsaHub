@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-10 m-auto">
             <div class="d-flex justify-content-between align-items-end mb-3">
-                <h3 class="fw-bold mb-3 mt-5">Company Details</h3>
+                <h3 class="mb-3 mt-5">Details {{ $company->name }}</h3>
                 <a href="{{ route('dashboard.companies.index') }}" class="btn btn-dark">
                     Back
                 </a>
@@ -48,18 +48,10 @@
 
                     <tr>
                         <td class="fw-bold">Created At</td>
-                        <td>{{ $company->created_at->format('Y-m-d') }}</td>
+                        <td>{{ $company->created_at->format('Y-m-d - h:i A') }}</td>
                     </tr>
                 </tbody>
             </table>
-
-            <div class="d-flex justify-content-end mt-3">
-                <a href="{{ route('dashboard.companies.edit', $company->id) }}"
-                   class="btn btn-success me-2">
-                    Edit
-                </a>
-            </div>
-
         </div>
     </div>
 </div>

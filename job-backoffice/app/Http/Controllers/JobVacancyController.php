@@ -2,65 +2,85 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobVacanceRequest;
+use App\Models\Company;
+use App\Models\JobCategory;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
 
 class JobVacancyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+public function index(Request $request)
     {
-        $vacancies = JobVacancy::latest()->get();
-        return view("dashboard.vacancies.index" , compact("vacancies"));
+        // Active
+        $query = JobVacancy::latest();
+        // Archived
+        if ($request->input("archived") == true) {
+            $query->onlyTrashed();
+        }
+
+        $vacances = $query->paginate(7)->onEachSide(2);
+        return view("dashboard.vacances.index", compact(['vacances']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $categories = JobCategory::all();
+        $companies = Company::all();
+        return view('dashboard.vacances.create', compact(['categories','companies']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(JobVacanceRequest $request)
     {
-        //
+        $validated = $request->validated();
+        JobVacancy::create($validated);
+
+        return redirect()->route('dashboard.vacances.index')->with('success','job vacances created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(JobVacancy $jobVacancy)
+    public function show($id)
     {
-        //
+        $vacance = JobVacancy::findOrFail($id);
+        return view('dashboard.vacances.show', compact(['vacance']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(JobVacancy $jobVacancy)
+    public function edit($id)
     {
-        //
+        $vacance = JobVacancy::findOrFail($id);
+        $categories = JobCategory::all();
+        $companies = Company::all();
+        return view('dashboard.vacances.edit', compact(['vacance','categories','companies']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, JobVacancy $jobVacancy)
+    public function update(JobVacanceRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $vacance = JobVacancy::findOrFail($id);
+        $vacance->update($validated);
+        
+        return redirect()->route('dashboard.vacances.index')->with('success','job vacances updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(JobVacancy $jobVacancy)
+public function destroy($id)
     {
-        //
+        $vacance = JobVacancy::findOrFail($id);
+        $vacance->delete();
+        return redirect()->route("dashboard.vacances.index")->with("success", "Deleted archived a vacance");
+    }
+
+    public function restore($id)
+    {
+        $vacance = JobVacancy::withTrashed()->findOrFail($id);
+        $vacance->restore();
+        return redirect()->route("dashboard.vacances.index", ['archived' => 'true'])->with("success", "Restored vacance Successfully!");
+    }
+    public function deleteTrash($id)
+    {
+        $vacance = JobVacancy::withTrashed()->findOrFail($id);
+        $vacance->forceDelete();
+        return redirect()->route("dashboard.vacances.index", ['archived' => 'true'])->with("success", "Deleted vacance successfull");
     }
 }

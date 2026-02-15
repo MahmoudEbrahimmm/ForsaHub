@@ -18,7 +18,7 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     Route::resource('resumes', ResumeController::class);
     Route::resource('applications', JobApplicationController::class);
     Route::resource('categories', JobCategoryController::class);
-    Route::resource('Vacances', JobVacancyController::class);
+    Route::resource('vacances', JobVacancyController::class);
     Route::resource('users', UserController::class);
 
     // Trash Categories Route
@@ -27,6 +27,9 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     // Trash Companies Route
     Route::get('companies/{id}/restore',[CompanyController::class,'restore'])->name('companies.restore');
     Route::delete('companies/{id}/delete',[CompanyController::class,'deleteTrash'])->name('companies.delete');
+    // Trash JobVacancy Route
+    Route::get('vacances/{id}/restore',[JobVacancyController::class,'restore'])->name('vacances.restore');
+    Route::delete('vacances/{id}/delete',[JobVacancyController::class,'deleteTrash'])->name('vacances.delete');
 
 });
 

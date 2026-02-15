@@ -2,65 +2,81 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        $companies = Company::latest()->get();
-        return view("dashboard.companies.index" , compact("companies"));
+        // Active
+        $query = Company::latest();
+        $users = User::all();
+        // Archived
+        if ($request->input("archived") == true) {
+            $query->onlyTrashed();
+        }
+
+        $companies = $query->paginate(10)->onEachSide(2);
+        return view("dashboard.companies.index", compact(['companies', 'users']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Company $company)
     {
-        //
+        return view('dashboard.companies.show', compact('company'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Company $company)
+
+    public function create()
     {
-        //
+        $owners = User::all();
+        return view("dashboard.companies.create", compact(["owners"]));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Company $company)
+    public function store(CompanyRequest $request)
     {
-        //
+        $validated = $request->validated();
+        Company::create($validated);
+        return redirect()->route("dashboard.companies.index")->with("success", "Created company Successfully");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Company $company)
+    public function edit($id)
     {
-        //
+        $owners = User::all();
+        $company = Company::findOrFail($id);
+        return view("dashboard.companies.edit", compact(['company','owners']));
+    }
+
+    public function update(CompanyRequest $request, $id)
+    {
+        $validated = $request->validated();
+        $company = Company::findOrFail($id);
+        $company->update($validated);
+
+        return redirect()->route("dashboard.companies.index")->with("success", "Updated company name success");
+    }
+
+    public function destroy($id)
+    {
+        $company = Company::findOrFail($id);
+        $company->delete();
+        return redirect()->route("dashboard.companies.index")->with("success", "Deleted archived a company");
+    }
+
+    public function restore($id)
+    {
+        $company = Company::withTrashed()->findOrFail($id);
+        $company->restore();
+        return redirect()->route("dashboard.companies.index", ['archived' => 'true'])->with("success", "Restored company Successfully!");
+    }
+    public function deleteTrash($id)
+    {
+        $company = Company::withTrashed()->findOrFail($id);
+        $company->forceDelete();
+        return redirect()->route("dashboard.companies.index", ['archived' => 'true'])->with("success", "Deleted company successfull");
     }
 }
+

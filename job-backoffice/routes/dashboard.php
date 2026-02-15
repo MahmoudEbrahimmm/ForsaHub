@@ -24,6 +24,9 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     // Trash Categories Route
     Route::get('categories/{id}/restore',[JobCategoryController::class,'restore'])->name('categories.restore');
     Route::delete('categories/{id}/delete',[JobCategoryController::class,'deleteTrash'])->name('categories.delete');
+    // Trash Companies Route
+    Route::get('companies/{id}/restore',[CompanyController::class,'restore'])->name('companies.restore');
+    Route::delete('companies/{id}/delete',[CompanyController::class,'deleteTrash'])->name('companies.delete');
 
 });
 

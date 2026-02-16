@@ -13,7 +13,7 @@ class JobApplication extends Model
     protected $table = 'job_applications';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['status','ai_generated_score','ai_generated_feedback','job_vacancy_id','user_id','resume_id'];
+protected $fillable = ['status','ai_generated_score','ai_generated_feedback','job_vacancy_id','user_id','resume_id'];
     protected $dates = ['deleted_at'];
     protected function casts(): array
     {return ['deleted_at' => 'datetime'];}

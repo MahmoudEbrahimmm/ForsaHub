@@ -30,6 +30,9 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     // Trash JobVacancy Route
     Route::get('vacances/{id}/restore',[JobVacancyController::class,'restore'])->name('vacances.restore');
     Route::delete('vacances/{id}/delete',[JobVacancyController::class,'deleteTrash'])->name('vacances.delete');
+    // Trash JobApplication Route
+    Route::get('applications/{id}/restore',[JobApplicationController::class,'restore'])->name('applications.restore');
+    Route::delete('applications/{id}/delete',[JobApplicationController::class,'deleteTrash'])->name('applications.delete');
 
 });
 

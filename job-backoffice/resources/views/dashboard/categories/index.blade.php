@@ -20,13 +20,15 @@
                     <thead>
                         <tr>
                             <td>Name</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($categories as $category)
-                            <tr>
-                                <td>{{ $category->name }}</td>
+                        <td class="fw-bold">Created At</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($categories as $category)
+                    <tr>
+                        <td>{{ $category->name }}</td>
+                        <td>{{ $category->created_at->format('Y-m-d h:i A') }}</td>
                                 <td>
                                     @if(request()->input('archived') == 'true')
                                     <a href="{{ route('dashboard.categories.restore', $category->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-rotate-right"></i></a>

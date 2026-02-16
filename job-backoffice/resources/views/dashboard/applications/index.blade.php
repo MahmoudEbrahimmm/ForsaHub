@@ -6,33 +6,38 @@
             <div class="col-md-10 text-center m-auto">
                 <x-success />
                 <div class="d-flex justify-content-between align-items-end mb-3">
-                    <h3 class="fw-bold mb-3 mt-5">Job companies {{ request()->input('archived') == 'true' ? '(Archived)' : '' }}</h3>
+                    <h3 class="fw-bold mb-3 mt-5">Job applications {{ request()->input('archived') == 'true' ? '(Archived)' : '' }}</h3>
                     <div>
                         @if(request()->input('archived') == 'true')
-                        <a href="{{ route('dashboard.companies.index') }}" class="btn btn-dark me-2">Active companies</a>
+                        <a href="{{ route('dashboard.applications.index') }}" class="btn btn-dark me-2">Active applications</a>
                         @else
-                        <a href="{{ route('dashboard.companies.create') }}" class="btn btn-primary">Add company</a>
-                        <a href="{{ route('dashboard.companies.index', ['archived' => 'true']) }}" class="btn btn-dark me-2">Archived companies</a>
+                        <a href="{{ route('dashboard.applications.index', ['archived' => 'true']) }}" class="btn btn-dark me-2">Archived applications</a>
                         @endif
                     </div>
                 </div>
                 <table class="table bg-white p-3 rounded shadow-sm">
                     <thead>
                         <tr>
-                            <td>Name</td>
+                            <td>Applicant Name</td>
+                            <td>Postion (Job Vacancy)</td>
+                            <td>Company</td>
+                            <td>Status</td>
                             <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($companies as $company)
+                        @foreach ($applications as $application)
                             <tr>
-                                <td>{{ $company->name }}</td>
+                                <td>{{ $application->user->name }}</td>
+                                <td>{{ $application->jobVacancy->title }}</td>
+                                <td>{{ $application->jobVacancy->company->name }}</td>
+                                <td>{{ $application->status }}</td>
                                 <td>
                                     @if(request()->input('archived') == 'true')
-                                    <a href="{{ route('dashboard.companies.restore', $company->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-rotate-right"></i></a>
-                                    <form action="{{ route('dashboard.companies.delete', $company->id) }}" method="POST"
+                                    <a href="{{ route('dashboard.applications.restore', $application->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-rotate-right"></i></a>
+                                <form action="{{ route('dashboard.applications.delete', $application->id) }}" method="POST"
                                         style="display: inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this company?')">
+                                        onsubmit="return confirm('Are you sure you want to delete this application?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-warning">
@@ -40,8 +45,9 @@
                                         </button>
                                     </form>
                                     @else
-                                    <a href="{{ route('dashboard.companies.edit', $company->id) }}" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <form action="{{ route('dashboard.companies.destroy', $company->id) }}" method="POST"
+                                    <a href="{{ route('dashboard.applications.show', $application->id) }}" class="btn btn-sm btn-primary"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('dashboard.applications.edit', $application->id) }}" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <form action="{{ route('dashboard.applications.destroy', $application->id) }}" method="POST"
                                         style="display: inline">
                                         @csrf
                                         @method('DELETE')
@@ -56,7 +62,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{ $companies->withQueryString()->links() }}
+                {{ $applications->withQueryString()->links() }}
             </div>
         </div>
     </div>

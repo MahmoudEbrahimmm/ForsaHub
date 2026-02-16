@@ -38,10 +38,10 @@
                                 <td>
                                     @if ($company->website)
                                         <a href="{{ $company->website }}" target="_blank">
-                                            {{ $company->website }}
+                                            <h5 class="btn btn-outline-primary">Go to Website</h5>
                                         </a>
                                     @else
-                                        <span class="text-muted">N/A</span>
+                                        <span class="text-muted">Null</span>
                                     @endif
                                 </td>
 

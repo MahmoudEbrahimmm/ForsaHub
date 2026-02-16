@@ -2,66 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobApplicationRequest;
 use App\Models\JobApplication;
 use Illuminate\Http\Request;
 
 class JobApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $applications = JobApplication::latest()->get();
-        return view("dashboard.applications.index" , compact("applications"));
+        // Active
+        $query = JobApplication::latest();
+        // Archived
+        if ($request->input("archived") == true) {
+            $query->onlyTrashed();
+        }
 
+        $applications = $query->paginate(10)->onEachSide(2);
+        return view("dashboard.applications.index", compact(['applications']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $application = JobApplication::findOrFail($id);
+        return view('dashboard.applications.show', compact(['application']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        //
+        $application = JobApplication::findOrFail($id);
+        return view('dashboard.applications.edit', compact(['application']));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(JobApplication $jobApplication)
+    public function update(JobApplicationRequest $request, $id)
     {
-        //
+        $application = JobApplication::findOrFail($id);
+        $application->update([
+            'status'=> $request->input('status'),
+        ]);
+
+        return redirect()->route('dashboard.applications.index')->with('success', 'Updated job application successfully!');
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(JobApplication $jobApplication)
+    public function destroy($id)
     {
-        //
+        $application = JobApplication::findOrFail($id);
+        $application->delete();
+        return redirect()->route('dashboard.applications.index')->with('success', 'Deleted archived a job application');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, JobApplication $jobApplication)
+    public function restore($id)
     {
-        //
+        $application = JobApplication::withTrashed()->findOrFail($id);
+        $application->restore();
+        return redirect()->route("dashboard.applications.index", ['archived' => 'true'])->with("success", "Restored a job application Successfully!");
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(JobApplication $jobApplication)
+    public function deleteTrash($id)
     {
-        //
+        $application = JobApplication::withTrashed()->findOrFail($id);
+        $application->forceDelete();
+        return redirect()->route("dashboard.applications.index", ['archived' => 'true'])->with("success", "Deleted a job application successfull");
     }
 }

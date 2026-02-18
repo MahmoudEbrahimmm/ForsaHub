@@ -33,6 +33,9 @@ Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
     // Trash JobApplication Route
     Route::get('applications/{id}/restore',[JobApplicationController::class,'restore'])->name('applications.restore');
     Route::delete('applications/{id}/delete',[JobApplicationController::class,'deleteTrash'])->name('applications.delete');
+    // Trash User Route
+    Route::get('users/{id}/restore',[UserController::class,'restore'])->name('users.restore');
+    Route::delete('users/{id}/delete',[UserController::class,'deleteTrash'])->name('users.delete');
 
 });
 

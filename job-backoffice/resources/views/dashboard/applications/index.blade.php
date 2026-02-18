@@ -28,7 +28,7 @@
                     <tbody>
                         @foreach ($applications as $application)
                             <tr>
-                                <td>{{ $application->user->name }}</td>
+                                <td>{{ $application->user->name ?? 'Deleted-account' }}</td>
                                 <td>{{ $application->jobVacancy->title }}</td>
                                 <td>{{ $application->jobVacancy->company->name }}</td>
                                 <td>{{ $application->status }}</td>

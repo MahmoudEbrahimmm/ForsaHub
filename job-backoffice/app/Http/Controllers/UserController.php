@@ -2,63 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view("dashboard.users.index");
+        // Active
+        $query = User::latest();
+        // Archived
+        if ($request->input("archived") == true) {
+            $query->onlyTrashed();
+        }
+
+        $users = $query->paginate(10)->onEachSide(2);
+        return view("dashboard.users.index", compact(['users']));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('dashboard.users.edit', compact(['user']));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(UserRequest $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role' => $request->input('role'),
+        ]);
+        return redirect()->route('dashboard.users.index')->with('success', 'Updated data-user successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('dashboard.users.index')->with('success', 'Deleted archived a job user');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function restore($id)
     {
-        //
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+        return redirect()->route("dashboard.users.index", ['archived' => 'true'])->with("success", "Restored a job user Successfully!");
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function deleteTrash($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $user = User::withTrashed()->findOrFail($id);
+        $user->forceDelete();
+        return redirect()->route("dashboard.users.index", ['archived' => 'true'])->with("success", "Deleted a job user successfull");
     }
 }

@@ -18,7 +18,9 @@ class CompanyRequest extends FormRequest
             'address'  => 'required|string|max:500',
             'industry' => 'required|string|max:255',
             'website'  => 'nullable|url|max:255',
-            'owner_id' => 'required|exists:users,id',
+            'owner_id' => auth()->user()->role === 'admin'
+            ? 'required|exists:users,id'
+            : 'nullable'
         ];
     }
 }

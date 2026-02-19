@@ -12,6 +12,12 @@ class JobApplicationController extends Controller
     {
         // Active
         $query = JobApplication::latest();
+        if (auth()->user()->role == 'company-owner') {
+            $query->whereHas('jobVacancy', function ($q) {
+                $q->where('company_id', auth()->user()->company->id);
+            });
+        }
+
         // Archived
         if ($request->input("archived") == true) {
             $query->onlyTrashed();
@@ -37,11 +43,10 @@ class JobApplicationController extends Controller
     {
         $application = JobApplication::findOrFail($id);
         $application->update([
-            'status'=> $request->input('status'),
+            'status' => $request->input('status'),
         ]);
 
         return redirect()->route('dashboard.applications.index')->with('success', 'Updated job application successfully!');
-        
     }
 
     public function destroy($id)

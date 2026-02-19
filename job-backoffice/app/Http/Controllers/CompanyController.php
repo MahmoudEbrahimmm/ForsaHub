@@ -37,23 +37,40 @@ class CompanyController extends Controller
         return redirect()->route("dashboard.companies.index")->with("success", "Created company Successfully");
     }
 
-    public function show(Company $company)
+    public function show($id = null)
     {
+        if($id)
+            $company = Company::findOrFail($id);
+        else{
+            $company = Company::where('owner_id', auth()->user()->id)->first();
+        }
         return view('dashboard.companies.show', compact('company'));
     }
 
-    public function edit($id)
+    public function edit($id = null)
     {
         $owners = User::all();
-        $company = Company::findOrFail($id);
+        if($id)
+            $company = Company::findOrFail($id);
+        else{
+            $company = Company::where('owner_id', auth()->user()->id)->first();
+        }
         return view("dashboard.companies.edit", compact(['company','owners']));
     }
 
-    public function update(CompanyRequest $request, $id)
+    public function update(CompanyRequest $request, $id = null)
     {
         $validated = $request->validated();
-        $company = Company::findOrFail($id);
+        if($id){
+            $company = Company::findOrFail($id);
+        }else {
+            $company = Company::where('owner_id',auth()->user()->id)->first();
+        }
         $company->update($validated);
+
+        if(auth()->user()->role == 'company-owner'){
+        return redirect()->route("dashboard.my-company.show")->with("success", "Updated company success");
+        }
 
         return redirect()->route("dashboard.companies.index")->with("success", "Updated company name success");
     }

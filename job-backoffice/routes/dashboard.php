@@ -11,42 +11,46 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(["as"=> "dashboard.","middleware"=> "auth"], function () {
-
+Route::group(["as"=> "dashboard.", 'middleware' => ['auth', 'role:admin,company-owner'] ], function () {
+    // Shared Routes
     Route::get('/', [DashboardController::class,'index'])->name('index');
-    Route::resource('companies', CompanyController::class);
-    Route::resource('resumes', ResumeController::class);
-    Route::resource('applications', JobApplicationController::class);
-    Route::resource('categories', JobCategoryController::class);
-    Route::resource('vacances', JobVacancyController::class);
-    Route::resource('users', UserController::class);
 
-    // Trash Categories Route
-    Route::get('categories/{id}/restore',[JobCategoryController::class,'restore'])->name('categories.restore');
-    Route::delete('categories/{id}/delete',[JobCategoryController::class,'deleteTrash'])->name('categories.delete');
-    // Trash Companies Route
-    Route::get('companies/{id}/restore',[CompanyController::class,'restore'])->name('companies.restore');
-    Route::delete('companies/{id}/delete',[CompanyController::class,'deleteTrash'])->name('companies.delete');
-    // Trash JobVacancy Route
+    // JobVacancy Route
+    Route::resource('vacances', JobVacancyController::class);
     Route::get('vacances/{id}/restore',[JobVacancyController::class,'restore'])->name('vacances.restore');
     Route::delete('vacances/{id}/delete',[JobVacancyController::class,'deleteTrash'])->name('vacances.delete');
-    // Trash JobApplication Route
+
+    // JobApplication Route
+    Route::resource('applications', JobApplicationController::class);
     Route::get('applications/{id}/restore',[JobApplicationController::class,'restore'])->name('applications.restore');
     Route::delete('applications/{id}/delete',[JobApplicationController::class,'deleteTrash'])->name('applications.delete');
-    // Trash User Route
-    Route::get('users/{id}/restore',[UserController::class,'restore'])->name('users.restore');
-    Route::delete('users/{id}/delete',[UserController::class,'deleteTrash'])->name('users.delete');
 
 });
 
+// Company Routes
+Route::group(["as"=> "dashboard.", 'middleware' => ['auth', 'role:company-owner'] ], function () {
+    Route::get('my-company/show', [CompanyController::class,'show'])->name('my-company.show');
+    Route::get('my-company/edit', [CompanyController::class,'edit'])->name('my-company.edit');
+    Route::put('my-company/update', [CompanyController::class,'update'])->name('my-company.update');
+});
 
+// Admin Routes
+Route::group(["as"=> "dashboard.", 'middleware' => ['auth', 'role:admin'] ], function () {
+    // Resumes Route
+    Route::resource('resumes', ResumeController::class);
+    // Categories Route
+    Route::resource('categories', JobCategoryController::class);
+    Route::get('categories/{id}/restore',[JobCategoryController::class,'restore'])->name('categories.restore');
+    Route::delete('categories/{id}/delete',[JobCategoryController::class,'deleteTrash'])->name('categories.delete');
 
+    // Companies Route
+    Route::resource('companies', CompanyController::class);
+    Route::get('companies/{id}/restore',[CompanyController::class,'restore'])->name('companies.restore');
+    Route::delete('companies/{id}/delete',[CompanyController::class,'deleteTrash'])->name('companies.delete');
 
+    // User Route
+    Route::resource('users', UserController::class);
+    Route::get('users/{id}/restore',[UserController::class,'restore'])->name('users.restore');
+    Route::delete('users/{id}/delete',[UserController::class,'deleteTrash'])->name('users.delete');
 
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

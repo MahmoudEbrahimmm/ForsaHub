@@ -14,6 +14,9 @@ public function index(Request $request)
     {
         // Active
         $query = JobVacancy::latest();
+        if(auth()->user()->role == 'company-owner'){
+            $query->where('company_id', auth()->user()->company->id);
+        }
         // Archived
         if ($request->input("archived") == true) {
             $query->onlyTrashed();
@@ -60,7 +63,7 @@ public function index(Request $request)
         $validated = $request->validated();
         $vacance = JobVacancy::findOrFail($id);
         $vacance->update($validated);
-        
+
         return redirect()->route('dashboard.vacances.index')->with('success','job vacances updated successfully!');
     }
 

@@ -1,3 +1,10 @@
+<?php
+if(auth()->user()->role == 'admin'){
+    $formAction = route('dashboard.companies.update', $company->id);
+}else if(auth()->user()->role == 'company-owner'){
+    $formAction = route('dashboard.my-company.update');
+}
+?>
 @extends('layouts.dashboard')
 @section('content')
     <div class="container">
@@ -6,7 +13,7 @@
                 <h3 class="text-center">Update company Data</h3>
 
                 <div class="bg-white p-3 rounded shadow-sm">
-                    <form action="{{ route('dashboard.companies.update', $company->id) }}" method="POST">
+                    <form action="{{ $formAction }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -37,24 +44,28 @@
                         @error('website')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        @if (auth()->user()->role == 'admin')
 
                         <label class="mb-2 mt-3">Owner</label>
                         <select name="owner_id" class="form-control @error('owner_id') is-invalid @enderror">
                             <option value="">Select Owner</option>
                             @foreach ($owners as $owner)
-                                <option value="{{ $owner->id }}"
-                                    {{ old('owner_id', $company->owner_id) == $owner->id ? 'selected' : '' }}>
-                                    {{ $owner->name }}
-                                </option>
+                            <option value="{{ $owner->id }}"
+                                {{ old('owner_id', $company->owner_id) == $owner->id ? 'selected' : '' }}>
+                                {{ $owner->name }}
+                            </option>
                             @endforeach
                         </select>
                         @error('owner_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        @endif
 
                         <div class="d-flex justify-content-between align-items-end mb-3 mt-4">
                             <button type="submit" class="btn btn-primary">Update</button>
+                            @if (auth()->user()->role == 'admin')
                             <a href="{{ route('dashboard.companies.index') }}" class="btn btn-secondary">Cancel</a>
+                            @endif
                         </div>
                     </form>
                 </div>

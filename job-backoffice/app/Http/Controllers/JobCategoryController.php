@@ -17,7 +17,7 @@ class JobCategoryController extends Controller
             $query->onlyTrashed();
         }
 
-        $categories = $query->paginate(10)->onEachSide(2);
+        $categories = $query->paginate(20)->onEachSide(2);
         return view("dashboard.categories.index" , compact("categories"));
 
     }

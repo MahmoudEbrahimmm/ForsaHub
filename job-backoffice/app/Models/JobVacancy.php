@@ -13,7 +13,7 @@ class JobVacancy extends Model
     protected $table = 'job_vacancies';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['title','description','location','salary','type','deleted_at','company_id','job_category_id'];
+    protected $fillable = ['title','description','location','salary','viewCount','type','deleted_at','company_id','job_category_id'];
     protected $dates = ['deleted_at'];
     protected function casts(): array
     {return ['deleted_at' => 'datetime'];}

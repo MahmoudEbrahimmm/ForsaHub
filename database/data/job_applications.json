@@ -1,0 +1,88 @@
+{
+    "jobApplications": [
+        {
+            "status": "pending",
+            "aiGeneratedScore": 7.9,
+            "aiGeneratedFeedback": "Candidate shows strong frontend skills and relevant project experience. Suitable for the position.",
+            "resume": {
+                "filename": "ahmed_ali_resume.pdf",
+                "fileUri": "resumes/ahmed_ali_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0101, Email: ahmed.ali@example.com, LinkedIn: linkedin.com/in/ahmedali",
+                "summary": "Frontend developer with 4+ years of experience creating responsive web interfaces using modern frameworks. Skilled in Vue.js and React.",
+                "skills": "Vue.js, React.js, JavaScript, HTML5, CSS3, Tailwind CSS, Vuex, Redux, Git, Responsive Design",
+                "experience": "Frontend Developer at NileTech Solutions (2019-Present)\n- Built responsive dashboards\n- Collaborated on API integration\n- Mentored junior developers\n\nJunior Frontend Developer at DeltaSoft (2017-2019)\n- Developed multiple client websites\n- Improved UI/UX based on feedback",
+                "education": "Bachelor of Science in Computer Science, Cairo University (2013-2017)\n- Graduated with honors\n- Relevant coursework: Web Development, UI/UX Design, Database Systems"
+            }
+        },
+        {
+            "status": "rejected",
+            "aiGeneratedScore": 4.8,
+            "aiGeneratedFeedback": "Candidate lacks sufficient backend experience. Skills mismatch for the role requirements.",
+            "resume": {
+                "filename": "mona_salem_resume.pdf",
+                "fileUri": "resumes/mona_salem_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0202, Email: mona.salem@example.com, LinkedIn: linkedin.com/in/monasalem",
+                "summary": "Junior web developer with 1 year experience mainly in frontend projects. Interested in backend development opportunities.",
+                "skills": "HTML, CSS, JavaScript, Node.js (basic), Express.js (basic), MongoDB (basic), Git",
+                "experience": "Web Developer at SmartVision Tech (2021-Present)\n- Assisted in frontend development\n- Implemented responsive layouts\n- Collaborated with senior developers",
+                "education": "Associate Degree in Web Development, Cairo Community College (2019-2021)\n- Graduated with distinction\n- Relevant coursework: HTML, CSS, JavaScript, Database Basics"
+            }
+        },
+        {
+            "status": "accepted",
+            "aiGeneratedScore": 9.5,
+            "aiGeneratedFeedback": "Highly skilled full stack developer with strong technical leadership experience. Excellent fit for the role.",
+            "resume": {
+                "filename": "omar_hassan_resume.pdf",
+                "fileUri": "resumes/omar_hassan_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0303, Email: omar.hassan@example.com, LinkedIn: linkedin.com/in/omarhassan",
+                "summary": "Senior full stack developer with 7+ years of experience building scalable applications. Expert in frontend and backend technologies.",
+                "skills": "React.js, Node.js, TypeScript, Express.js, MongoDB, PostgreSQL, Docker, Kubernetes, AWS, Git, Agile Methodologies",
+                "experience": "Lead Full Stack Developer at DeltaSoft (2018-Present)\n- Led product development\n- Implemented microservices architecture\n- Mentored junior developers\n\nFull Stack Developer at TechCore Solutions (2015-2018)\n- Developed multiple client applications\n- Optimized backend performance",
+                "education": "Master of Science in Software Engineering, Cairo University (2013-2015)\n- Graduated with distinction\nBachelor of Science in Computer Science, Cairo University (2009-2013)\n- Graduated with honors"
+            }
+        },
+        {
+            "status": "pending",
+            "aiGeneratedScore": 7.3,
+            "aiGeneratedFeedback": "Candidate has relevant DevOps experience and automation skills. Good potential fit for the role.",
+            "resume": {
+                "filename": "layla_khaled_resume.pdf",
+                "fileUri": "resumes/layla_khaled_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0404, Email: layla.khaled@example.com, LinkedIn: linkedin.com/in/laylakh",
+                "summary": "DevOps engineer with 3+ years of experience in cloud automation and CI/CD pipelines. Skilled in AWS and Docker.",
+                "skills": "Docker, Kubernetes, AWS, Azure, Jenkins, GitLab CI, Terraform, Ansible, Linux, Bash, Python",
+                "experience": "DevOps Engineer at NileTech Solutions (2019-Present)\n- Managed cloud infrastructure\n- Automated deployment pipelines\n- Monitored system performance\n\nJunior DevOps Engineer at Future Code Labs (2017-2019)\n- Assisted with CI/CD implementation\n- Managed monitoring and logs",
+                "education": "Bachelor of Science in Computer Science, Cairo University (2013-2017)\n- Graduated with honors\n- Relevant coursework: Cloud Computing, Systems Administration, Network Security"
+            }
+        },
+        {
+            "status": "rejected",
+            "aiGeneratedScore": 5.0,
+            "aiGeneratedFeedback": "Candidate has some backend skills but not enough experience for the senior level position.",
+            "resume": {
+                "filename": "ali_mohamed_resume.pdf",
+                "fileUri": "resumes/ali_mohamed_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0505, Email: ali.mohamed@example.com, LinkedIn: linkedin.com/in/alimohamed",
+                "summary": "Backend developer with 2 years of experience in server-side applications and cloud platforms.",
+                "skills": "Java, Spring Boot, MySQL, Docker (basic), AWS (basic), Git, RESTful APIs",
+                "experience": "Backend Developer at DeltaSoft (2019-Present)\n- Developed RESTful APIs\n- Implemented database solutions\n- Collaborated with frontend team\n\nJunior Developer at Web Innovations (2018-2019)\n- Assisted in backend tasks\n- Fixed bugs and maintained features",
+                "education": "Bachelor of Science in Software Engineering, Cairo University (2014-2018)\n- Graduated with distinction\n- Relevant coursework: Database Systems, Backend Development, Software Architecture"
+            }
+        },
+        {
+            "status": "pending",
+            "aiGeneratedScore": 8.1,
+            "aiGeneratedFeedback": "Candidate has strong mobile development skills and relevant experience. Good fit for the position.",
+            "resume": {
+                "filename": "noor_salim_resume.pdf",
+                "fileUri": "resumes/noor_salim_resume.pdf",
+                "contactDetails": "Phone: (202) 555-0606, Email: noor.salim@example.com, LinkedIn: linkedin.com/in/noorsalim",
+                "summary": "Mobile developer with 4+ years experience building cross-platform mobile applications using React Native and native technologies.",
+                "skills": "React Native, JavaScript, TypeScript, Swift, Kotlin, Firebase, RESTful APIs, Git, Mobile UI/UX Design",
+                "experience": "Mobile Developer at Smart Vision Tech (2018-Present)\n- Built cross-platform apps\n- Optimized app performance\n- Worked on native iOS and Android features\n\nJunior Mobile Developer at DeltaSoft (2016-2018)\n- Developed client apps\n- Assisted in backend integration",
+                "education": "Bachelor of Science in Computer Science, Cairo University (2012-2016)\n- Graduated with honors\n- Relevant coursework: Mobile Development, UI/UX Design, Software Engineering"
+            }
+        }
+    ]
+}
